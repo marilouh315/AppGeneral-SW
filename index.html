@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Création d'utilisateur</title>
+    <link rel="stylesheet" type="text/css" href="../AppGeneral-SW/assets/css/style.css">
+    <script src="../AppGeneral-SW/assets/js/script.js"></script>
+</head>
+<body>
+    <div class="main-conteneur">
+        <h2>Création d'un utilisateur</h2>
+        <p>Remplissez les champs suivants pour vous créer un utilisateur. Il vous permettra d'utiliser l'API :)</p>
+        <form action="/create_user" method="POST">
+            <label for="nom">Nom :</label><br>
+            <input type="text" id="nom" name="nom" required><br><br>
+    
+            <label for="courriel">Courriel :</label><br>
+            <input type="email" id="courriel" name="courriel" required><br><br>
+    
+            <label for="mot_de_passe">Mot de passe :</label><br>
+            <input type="password" id="mot_de_passe" name="mot_de_passe" required><br><br>
+    
+            <input type="submit" value="Créer utilisateur">
+        </form>
+    </div>
+</body> 
+</html>

@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "9ae9386d-5c27-4b68-bd7e-96b2072c6a38",
+		"name": "ProjetSession-ServiceWeb_MYSQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32422378"
+	},
+	"item": [
+		{
+			"name": "Requêtes des TACHES",
+			"item": [
+				{
+					"name": "Ajouter TACHE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "75407791",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"utilisateur_id\":1,\r\n    \"titre_tache\":\"test\",\r\n    \"description\":\"testtttt\",\r\n    \"date_debut\":\"2022-03-23\",\r\n    \"date_echeance\":\"2025-03-23\",\r\n    \"complete_tache\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/tache",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"tache"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier TACHE au complet",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "maril_cle",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"utilisateur_id\":2,\r\n    \"titre_tache\":\"Modif 4\",\r\n    \"description\":\"testtttt\",\r\n    \"date_debut\":\"2023-12-23\",\r\n    \"date_echeance\":\"2024-12-23\",\r\n    \"complete_tache\": false,\r\n    \"id_tache\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/tache/",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"tache",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier statut TACHE",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "maril_cle",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"complete_tache\": false,\r\n    \"id_tache\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/tache/update_statut",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"tache",
+								"update_statut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete TACHE",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api_test",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/tache/",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"tache",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Create, Delete, Update (au complet et statut seulement)"
+		},
+		{
+			"name": "Requêtes des SOUS-TACHES",
+			"item": [
+				{
+					"name": "Ajouter SOUS-TACHE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "maril_cle",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_tache\":5, \r\n    \"titre_sous_tache\":\"SOUSSSSSSS TACHHEEEEEEEHEEE\", \r\n    \"complete_sous_tache\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"sous_tache"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier statut SOUS-TACHE",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "maril",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"complete_sous_tache\": false,\r\n    \"id_sous_tache\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/update_statut",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"sous_tache",
+								"update_statut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier SOUS-TACHE au complet",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api_test",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_tache\":4,\r\n    \"titre_sous_tache\":\"testtttttttttt\",\r\n    \"complete_sous_tache\":true,\r\n    \"id_sous_tache\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"sous_tache",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete SOUS-TACHE",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api_test",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/6",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"sous_tache",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Create, Delete, Update (au complet et statut seulement)"
+		},
+		{
+			"name": "Requêtes READ",
+			"item": [
+				{
+					"name": "Afficher tâches par défaut",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api_test",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Afficher ALL taches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api_test",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/all",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Afficher détails d'une tâche",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api_test",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/liste_taches/detail/3",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"liste_taches",
+								"detail",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requêtes d'affichage"
+		},
+		{
+			"name": "Requêtes UTILISATEUR",
+			"item": [
+				{
+					"name": "Créer Utilisateur",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom_utilisateur\":\"allo\",\r\n    \"courriel_utilisateur\":\"allo@allo.com\",\r\n    \"motDePasse_utilisateur\":\"allo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/users/",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generer nouvelle cléAPI",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courriel_utilisateur\":\"allo@allo.com\",\r\n    \"motDePasse_utilisateur\":\"allo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/users/",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Afficher données",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courriel_utilisateur\":\"allo@allo.com\",\r\n    \"motDePasse_utilisateur\":\"allo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/users/",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requêtes de création d'un nouvel utilisateur et génération de clé d'API"
+		}
+	]
+}
