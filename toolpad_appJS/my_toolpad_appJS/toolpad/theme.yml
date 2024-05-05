@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Theme
+
+apiVersion: v1
+kind: theme
+spec:
+  options:
+    palette:
+      primary:
+        main: "#ffc107"
+        contrastText: rgba(0, 0, 0, 0.87)
+      secondary:
+        main: "#9c27b0"
+        contrastText: "#fff"

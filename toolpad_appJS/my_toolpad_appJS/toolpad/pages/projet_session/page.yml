@@ -1,0 +1,408 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  alias:
+    - 4fQ37o6
+  title: Gestion de tâche
+  displayName: projet_session
+  content:
+    - component: Text
+      name: markdown
+      props:
+        mode: text
+        value: GESTION de TÂCHES
+        variant: h1
+      layout:
+        horizontalAlign: center
+        verticalAlign: center
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: Button
+          name: button1
+          props:
+            fullWidth: true
+            content: Tâches par défaut
+            onClick:
+              $$jsExpressionAction: "afficherTachesParDefaut.refetch()\r\n"
+            color: secondary
+        - component: Button
+          name: button
+          props:
+            fullWidth: true
+            content: Toutes les tâches
+            onClick:
+              $$jsExpressionAction: "afficherALLTaches.refetch();\r\n"
+            size: small
+            variant: contained
+          layout:
+            horizontalAlign: center
+    - component: PageRow
+      name: pageRow2
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown1
+          props:
+            mode: text
+            value: Vos tâches par défaut
+            variant: h3
+        - component: Text
+          name: markdown2
+          props:
+            mode: text
+            value: Toutes vos tâches
+            variant: h3
+    - component: PageRow
+      name: pageRow1
+      props:
+        justifyContent: start
+      children:
+        - component: DataGrid
+          name: dataGrid
+          layout:
+            height: 232
+            columnSize: 0.9995383089207681
+          props:
+            rows:
+              $$jsExpression: afficherTachesParDefaut.data.result
+            rowsSource: prop
+            columns:
+              - field: id
+                type: number
+                width: 74
+              - field: titre
+                type: string
+                width: 148
+              - field: complete
+                type: boolean
+                width: 131
+            density: compact
+        - component: DataGrid
+          name: dataGrid1
+          layout:
+            height: 232
+            columnSize: 1.0004616910792319
+          props:
+            rows:
+              $$jsExpression: afficherALLTaches.data
+            rowsSource: prop
+            columns:
+              - field: id
+                type: number
+                width: 52
+              - field: titre
+                type: string
+                width: 155
+              - field: complete
+                type: boolean
+                width: 140
+            density: compact
+    - component: Text
+      name: markdown3
+      props:
+        mode: text
+        variant: h3
+        value: Afficher une tâche détaillée
+    - component: PageRow
+      name: pageRow4
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown4
+          props:
+            mode: text
+            value:
+              Sélectionnez une tâche à afficher avec les données plus haut et cliquez
+              sur le bouton pour afficher...
+            variant: subtitle2
+        - component: Button
+          name: button2
+          layout:
+            horizontalAlign: end
+            verticalAlign: center
+          props:
+            size: medium
+            content: Afficher les détails
+            onClick:
+              $$jsExpressionAction: afficherDetails.call()
+    - component: Container
+      name: container
+      children:
+        - component: PageRow
+          name: pageRow3
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: markdown5
+              props:
+                mode: text
+                value:
+                  $$jsExpression: "`Titre de la tâche :
+                    ${afficherDetails.data.result.taches[0].tache_titre}`"
+            - component: Text
+              name: markdown7
+              props:
+                mode: text
+                value:
+                  $$jsExpression: "`Date de début :
+                    ${afficherDetails.data.result.taches[0].date_debut}`"
+        - component: PageRow
+          name: pageRow6
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: markdown6
+              props:
+                mode: text
+                value:
+                  $$jsExpression: "`Description de la tâche :
+                    ${afficherDetails.data.result.taches[0].description}`"
+            - component: Text
+              name: markdown8
+              props:
+                mode: text
+                value:
+                  $$jsExpression: "`Date d'échéance :
+                    ${afficherDetails.data.result.taches[0].date_echeance}`"
+    - component: DataGrid
+      name: dataGrid2
+      layout:
+        height: 188
+      props:
+        rows:
+          $$jsExpression: afficherDetails.data.result.taches[0].sous_taches
+        columns:
+          - field: titre_sous_tache
+            type: string
+            width: 340
+          - field: complete_sous_tache
+            type: boolean
+            width: 229
+    - component: PageRow
+      name: pageRow5
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown9
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+              props:
+                mode: text
+                variant: h3
+                value: Ajouter une tâche
+            - component: Button
+              name: button3
+              props:
+                color: secondary
+                variant: contained
+                fullWidth: true
+                content: Ajouter
+                onClick:
+                  $$navigationAction:
+                    page: page_ajout_tache
+                    parameters: {}
+        - component: PageColumn
+          name: pageColumn1
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown11
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+              props:
+                mode: text
+                variant: h3
+                value: Modifier une tâche
+            - component: Button
+              name: button5
+              props:
+                color: secondary
+                fullWidth: true
+                content: Modifier
+                onClick:
+                  $$navigationAction:
+                    page: page_modifier_tache
+                    parameters: {}
+        - component: PageColumn
+          name: pageColumn2
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown10
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+              props:
+                mode: text
+                variant: h3
+                value: Supprimer une tâche
+            - component: Button
+              name: button4
+              props:
+                color: secondary
+                fullWidth: true
+                content: Supprimer
+                onClick:
+                  $$navigationAction:
+                    page: page_supprimer_tache
+                    parameters: {}
+    - component: PageRow
+      name: pageRow7
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn3
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown12
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+                verticalAlign: center
+              props:
+                mode: text
+                variant: h3
+                value: Ajouter une sous-tâche
+            - component: Button
+              name: button6
+              props:
+                color: secondary
+                variant: outlined
+                fullWidth: true
+                content: Ajouter
+                onClick:
+                  $$navigationAction:
+                    page: page_ajout_soustache
+                    parameters: {}
+        - component: PageColumn
+          name: pageColumn4
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown13
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+                verticalAlign: center
+              props:
+                mode: text
+                variant: h3
+                value: Modifier une sous-tâche
+            - component: Button
+              name: button7
+              props:
+                color: secondary
+                fullWidth: true
+                variant: outlined
+                content: Modifier
+                onClick:
+                  $$navigationAction:
+                    page: page_modifier_soustache
+                    parameters: {}
+        - component: PageColumn
+          name: pageColumn5
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown14
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+                verticalAlign: center
+              props:
+                mode: text
+                variant: h3
+                value: Supprimer une sous-tâche
+            - component: Button
+              name: button8
+              props:
+                color: secondary
+                fullWidth: true
+                variant: outlined
+                content: Supprimer
+                onClick:
+                  $$navigationAction:
+                    page: page_supprimer_soustache
+                    parameters: {}
+  queries:
+    - name: afficherALLTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: '"https://app-taches.onrender.com/api/liste_taches/all"'
+        headers: [{ name: Authorization, value: { $$env: API_KEY } }]
+        method: GET
+        transform: return data.result;
+        transformEnabled: true
+        searchParams: []
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: afficherTachesParDefaut
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transformEnabled: true
+        searchParams: []
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+      enabled: false
+      refetchInterval: 1000
+    - name: afficherDetails
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://app-taches.onrender.com/api/liste_taches/detail/${par\
+            ameters.id_tache}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: return data;
+        transformEnabled: false
+        searchParams: []
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid1.selection.id

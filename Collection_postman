@@ -17,12 +17,12 @@
 							{
 								"key": "Authorization",
 								"value": "75407791",
-								"type": "text"
+								"uuid": "11d28321-2002-4037-b403-61a5239e194f"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"utilisateur_id\":1,\r\n    \"titre_tache\":\"test\",\r\n    \"description\":\"testtttt\",\r\n    \"date_debut\":\"2022-03-23\",\r\n    \"date_echeance\":\"2025-03-23\",\r\n    \"complete_tache\":true\r\n}",
+							"raw": "{\r\n    \"utilisateur_id\":2,\r\n    \"titre_tache\":\"testtesttest\",\r\n    \"description\":\"testtesttest\",\r\n    \"date_debut\":\"2022-03-23\",\r\n    \"date_echeance\":\"2025-03-23\",\r\n    \"complete_tache\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,12 +54,12 @@
 							{
 								"key": "Authorization",
 								"value": "maril_cle",
-								"type": "text"
+								"uuid": "8aff4b40-f790-44d7-9027-425c55357cdb"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"utilisateur_id\":2,\r\n    \"titre_tache\":\"Modif 4\",\r\n    \"description\":\"testtttt\",\r\n    \"date_debut\":\"2023-12-23\",\r\n    \"date_echeance\":\"2024-12-23\",\r\n    \"complete_tache\": false,\r\n    \"id_tache\":4\r\n}",
+							"raw": "{\r\n    \"utilisateur_id\":3,\r\n    \"titre_tache\":\"TEst modif4\",\r\n    \"description\":\"test modif\",\r\n    \"date_debut\":\"2023-12-23\",\r\n    \"date_echeance\":\"2024-12-23\",\r\n    \"complete_tache\": true,\r\n    \"id_tache\":8\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,13 +91,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "maril_cle",
-								"type": "text"
+								"value": "75407791",
+								"uuid": "724f91ab-5f02-4c7f-9719-16d309dfd9df"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"complete_tache\": false,\r\n    \"id_tache\":4\r\n}",
+							"raw": "{\r\n    \"complete_tache\": false,\r\n    \"id_tache\":8\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,11 +130,11 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"type": "text"
+								"uuid": "08d84f0e-ccc1-47b3-9a97-5d6fbf7c11c9"
 							}
 						],
 						"url": {
-							"raw": "https://app-taches.onrender.com/api/liste_taches/tache/",
+							"raw": "https://app-taches.onrender.com/api/liste_taches/tache/7",
 							"protocol": "https",
 							"host": [
 								"app-taches",
@@ -145,7 +145,7 @@
 								"api",
 								"liste_taches",
 								"tache",
-								""
+								"7"
 							]
 						}
 					},
@@ -164,13 +164,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "maril_cle",
-								"type": "text"
+								"value": "75407791",
+								"uuid": "06814519-2f8b-439b-aed4-a89b2c19f3b3"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_tache\":5, \r\n    \"titre_sous_tache\":\"SOUSSSSSSS TACHHEEEEEEEHEEE\", \r\n    \"complete_sous_tache\": false\r\n}",
+							"raw": "{\r\n    \"id_tache\":7,\r\n    \"titre_sous_tache\":\"alo\",\r\n    \"complete_sous_tache\":true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -178,7 +178,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache",
+							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/",
 							"protocol": "https",
 							"host": [
 								"app-taches",
@@ -188,7 +188,8 @@
 							"path": [
 								"api",
 								"liste_taches",
-								"sous_tache"
+								"sous_tache",
+								""
 							]
 						}
 					},
@@ -202,7 +203,8 @@
 							{
 								"key": "Authorization",
 								"value": "maril",
-								"type": "text"
+								"type": "text",
+								"uuid": "59796615-14db-4796-84da-56c3030488f7"
 							}
 						],
 						"body": {
@@ -240,7 +242,8 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"type": "text"
+								"type": "text",
+								"uuid": "4c0720ae-5923-4d6e-be30-c13f3a1c60b8"
 							}
 						],
 						"body": {
@@ -277,12 +280,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "cle_api_test",
-								"type": "text"
+								"value": "maril_cle",
+								"uuid": "a9eee995-807f-4ce4-bc2b-d0d0e946798c"
 							}
 						],
 						"url": {
-							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/6",
+							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/10",
 							"protocol": "https",
 							"host": [
 								"app-taches",
@@ -293,7 +296,7 @@
 								"api",
 								"liste_taches",
 								"sous_tache",
-								"6"
+								"10"
 							]
 						}
 					},
@@ -313,7 +316,8 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"type": "text"
+								"type": "text",
+								"uuid": "5d352281-f5e8-4f46-b2a7-5bf62857f371"
 							}
 						],
 						"url": {
@@ -341,7 +345,8 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"type": "text"
+								"type": "text",
+								"uuid": "8754fb56-abcf-41ae-9fb6-14350b74f703"
 							}
 						],
 						"url": {
@@ -370,7 +375,7 @@
 								"key": "Authorization",
 								"value": "cle_api_test",
 								"type": "text",
-								"disabled": true
+								"uuid": "c7f216f9-677a-4bc3-b25c-e2f3be722495"
 							}
 						],
 						"url": {
@@ -404,7 +409,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nom_utilisateur\":\"allo\",\r\n    \"courriel_utilisateur\":\"allo@allo.com\",\r\n    \"motDePasse_utilisateur\":\"allo\"\r\n}",
+							"raw": "{\r\n    \"nom_utilisateur\":\"allo\",\r\n    \"courriel_utilisateur\":\"allo@icloud.com\",\r\n    \"motDePasse_utilisateur\":\"allo\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -488,6 +493,28 @@
 								"api",
 								"users",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Afficher tous les utilisateurs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://app-taches.onrender.com/api/users/all",
+							"protocol": "https",
+							"host": [
+								"app-taches",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"all"
 							]
 						}
 					},

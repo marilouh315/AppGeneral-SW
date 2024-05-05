@@ -1,0 +1,384 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Modifier une tâche
+  display: shell
+  authorization:
+    allowAll: true
+  content:
+    - component: Text
+      name: markdown
+      props:
+        mode: text
+        value: Modifier une tâche
+        variant: h1
+      layout:
+        verticalAlign: center
+        horizontalAlign: center
+    - component: PageRow
+      name: pageRow2
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown3
+          props:
+            mode: text
+            value: ID de la tâche
+            variant: subtitle2
+        - component: Text
+          name: markdown11
+          props:
+            mode: text
+            value: ID utilisateurs
+            variant: subtitle2
+    - component: PageRow
+      name: pageRow3
+      props:
+        justifyContent: start
+      children:
+        - component: DataGrid
+          name: dataGrid
+          layout:
+            height: 172
+          props:
+            rows:
+              $$jsExpression: donnerIDTaches.data
+            columns:
+              - field: id
+                type: number
+              - field: titre
+                type: string
+                width: 242
+        - component: DataGrid
+          name: dataGrid1
+          props:
+            rows:
+              $$jsExpression: donnerIDUtilisateurs.data
+            columns:
+              - field: id
+                type: number
+              - field: nom
+                type: string
+          layout:
+            height: 208
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown1
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+              props:
+                mode: text
+                value: AU COMPLET
+                variant: h3
+            - component: Text
+              name: markdown4
+              props:
+                mode: text
+                value:
+                  "Paramètres : id de la tâche, ton id utilisateur, titre de la tâche,
+                  description de la tâche, les dates et le statut"
+                variant: h6
+        - component: PageColumn
+          name: pageColumn1
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown2
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+              props:
+                mode: text
+                value: Statut de la tâche
+                variant: h3
+            - component: Text
+              name: markdown12
+              props:
+                mode: text
+                value: "Paramètres : id de la sous-tâche et le statut de la tâche"
+                variant: h6
+    - component: PageRow
+      name: pageRow1
+      props:
+        justifyContent: start
+      children:
+        - component: Container
+          name: container
+          children:
+            - component: PageRow
+              name: pageRow4
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown5
+                  props:
+                    mode: text
+                    value: Titre de la tâche
+                    variant: subtitle2
+                - component: TextField
+                  name: textField
+            - component: PageRow
+              name: pageRow5
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown6
+                  props:
+                    mode: text
+                    value: Description de la tâche
+                    variant: subtitle2
+                - component: TextField
+                  name: textField1
+            - component: PageRow
+              name: pageRow6
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown7
+                  props:
+                    mode: text
+                    value: Date de début
+                    variant: subtitle2
+                - component: DatePicker
+                  name: datePicker
+            - component: PageRow
+              name: pageRow7
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown8
+                  props:
+                    mode: text
+                    value: Date d'échéance
+                    variant: subtitle2
+                - component: DatePicker
+                  name: datePicker1
+            - component: PageRow
+              name: pageRow8
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown9
+                  props:
+                    mode: text
+                    value: Statut de la tâche
+                    variant: subtitle2
+                - component: Select
+                  name: select2
+                  props:
+                    fullWidth: true
+                    options:
+                      - "true"
+                      - "false"
+            - component: Button
+              name: button
+              props:
+                size: medium
+                content: Enregistrer modifs
+                onClick:
+                  $$jsExpressionAction: modifierTacheQuery.call()
+              layout:
+                horizontalAlign: center
+        - component: Container
+          name: container1
+          children:
+            - component: PageRow
+              name: pageRow9
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown10
+                  props:
+                    mode: text
+                    value: Statut de la sous-tâche
+                    variant: subtitle2
+                - component: Select
+                  name: select3
+                  props:
+                    fullWidth: true
+                    options:
+                      - "true"
+                      - "false"
+            - component: Button
+              name: button1
+              props:
+                size: medium
+                content: Enregistrer modifs
+                color: secondary
+                onClick:
+                  $$jsExpressionAction: modifierStatutQuery.call()
+              layout:
+                horizontalAlign: center
+    - component: Button
+      name: button2
+      props:
+        variant: text
+        content: Retour au menu principal
+        onClick:
+          $$navigationAction:
+            page: projet_session
+            parameters: {}
+        color: secondary
+  queries:
+    - name: donnerIDTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: "return data.result.map((taches) => {\r
+
+          \  return {\r
+
+          \    id: taches.id,\r
+
+          \    titre: taches.titre\r
+
+          \  }\r
+
+          });"
+        transformEnabled: true
+        searchParams: []
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: donnerIDUtilisateurs
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/users/all`"
+        headers: []
+        method: GET
+        transform: "return data.utilisateurs.map((utilisateurs) => {\r
+
+          \  return {\r
+
+          \    id: utilisateurs.id,\r
+
+          \    nom: utilisateurs.nom\r
+
+          \  }\r
+
+          });"
+        transformEnabled: true
+        searchParams: []
+    - name: modifierTacheQuery
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/tache/`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \    \"utilisateur_id\":\"${parameters.utilisateur_id}\",\r
+
+              \    \"titre_tache\":\"${parameters.titre_tache}\",\r
+
+              \    \"description\":\"${parameters.description}\",\r
+
+              \    \"date_debut\":\"${parameters.date_debut}\",\r
+
+              \    \"date_echeance\":\"${parameters.date_echeance}\",\r
+
+              \    \"complete_tache\":${parameters.complete_tache},\r
+
+              \    \"id_tache\": ${parameters.id_tache}\r
+
+              }`"
+          contentType: text/plain
+        method: PUT
+        searchParams: []
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+        - name: utilisateur_id
+          value:
+            $$jsExpression: dataGrid1.selection.id
+        - name: titre_tache
+          value:
+            $$jsExpression: textField.value
+        - name: description
+          value:
+            $$jsExpression: textField1.value
+        - name: date_debut
+          value:
+            $$jsExpression: datePicker.value
+        - name: date_echeance
+          value:
+            $$jsExpression: datePicker1.value
+        - name: complete_tache
+          value:
+            $$jsExpression: select2.value
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid.selection.id
+    - name: modifierStatutQuery
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://app-taches.onrender.com/api/liste_taches/tache/update\
+            _statut`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \    \"complete_tache\": \"${parameters.complete_tache}\",\r
+
+              \    \"id_tache\":\"${parameters.id_tache}\"\r
+
+              }`"
+          contentType: text/plain
+        method: PUT
+        searchParams: []
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+        - name: complete_tache
+          value:
+            $$jsExpression: select3.value
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid.selection.id

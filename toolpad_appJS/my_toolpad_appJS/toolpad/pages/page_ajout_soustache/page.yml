@@ -1,0 +1,152 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Ajouter sous tâche
+  display: shell
+  authorization:
+    allowAll: true
+  content:
+    - component: Text
+      name: markdown
+      props:
+        mode: text
+        value: Ajouter une sous-tâche
+        variant: h1
+      layout:
+        horizontalAlign: center
+        verticalAlign: center
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown1
+          layout:
+            columnSize: 1
+          props:
+            mode: text
+            value: Sélectionnez une tâche à assigner à votre sous-tâche -->
+        - component: DataGrid
+          name: dataGrid
+          props:
+            rows:
+              $$jsExpression: donnerIDTaches.data
+            columns:
+              - field: id
+                type: number
+              - field: titre
+                type: string
+                width: 168
+              - field: complete
+                type: boolean
+          layout:
+            height: 276
+    - component: PageRow
+      name: pageRow1
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown2
+          props:
+            mode: text
+            value: Titre de la sous-tâche
+        - component: TextField
+          name: textField
+          props:
+            isRequired: true
+            fullWidth: true
+    - component: PageRow
+      name: pageRow2
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown3
+          props:
+            mode: text
+            value: Statut de la sous-tâche
+        - component: Select
+          name: select
+          props:
+            fullWidth: true
+            isRequired: true
+            options:
+              - "true"
+              - "false"
+    - component: Button
+      name: button
+      props:
+        size: large
+        content: Ajouter
+        onClick:
+          $$jsExpressionAction: "ajouterSousTacheQuery.call()\r\n"
+    - component: Button
+      name: button1
+      props:
+        color: secondary
+        fullWidth: false
+        variant: text
+        content: Retour au menu principal
+        onClick:
+          $$navigationAction:
+            page: projet_session
+            parameters: {}
+  queries:
+    - name: donnerIDTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: return data.result;
+        transformEnabled: true
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: ajouterSousTacheQuery
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/sous_tache`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \  \"id_tache\":\"${parameters.id_tache}\",\r
+
+              \  \"titre_sous_tache\":\"${parameters.titre_sous_tache}\",\r
+
+              \  \"complete_sous_tache\":\"${parameters.complete_sous_tache}\"\r
+
+              }`"
+          contentType: text/plain
+        method: POST
+      parameters:
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid.selection.id
+        - name: titre_sous_tache
+          value:
+            $$jsExpression: textField.value
+        - name: complete_sous_tache
+          value:
+            $$jsExpression: select.value
+        - name: Authorization
+          value:
+            $$env: API_KEY

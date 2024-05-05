@@ -1,0 +1,108 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Supprimer une tâche
+  content:
+    - component: Text
+      name: markdown
+      layout:
+        horizontalAlign: center
+        verticalAlign: center
+      props:
+        mode: text
+        value: Supprimer une tâche
+        variant: h1
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown1
+          props:
+            mode: text
+            value: Sélectionner une tâche à supprimer
+            variant: h4
+        - component: Button
+          name: button2
+          props:
+            content: Refresh
+            onClick:
+              $$jsExpressionAction: donnerIDTaches.refetch()
+            fullWidth: true
+            size: large
+        - component: Button
+          name: button
+          props:
+            fullWidth: true
+            content: Supprimer une tâche
+            size: large
+            onClick:
+              $$jsExpressionAction: supprimerTacheQuery.call()
+    - component: DataGrid
+      name: dataGrid
+      props:
+        rows:
+          $$jsExpression: donnerIDTaches.data
+        columns:
+          - field: id
+            type: number
+          - field: titre
+            type: string
+            width: 393
+          - field: complete
+            type: boolean
+    - component: Button
+      name: button1
+      props:
+        content: Retour au menu principal
+        variant: text
+        onClick:
+          $$navigationAction:
+            page: projet_session
+            parameters: {}
+  queries:
+    - name: donnerIDTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: return data.result;
+        transformEnabled: true
+        searchParams: []
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: supprimerTacheQuery
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://app-taches.onrender.com/api/liste_taches/tache/${para\
+            meters.id_tache}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: DELETE
+        searchParams: []
+      parameters:
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid.selection.id
+        - name: Authorization
+          value:
+            $$env: API_KEY
+  display: shell
+  authorization:
+    allowAll: true

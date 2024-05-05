@@ -1,0 +1,238 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Ajouter une tâche
+  content:
+    - component: Text
+      name: markdown
+      layout:
+        horizontalAlign: center
+      props:
+        mode: text
+        value: Ajouter une tâche
+        variant: h1
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn
+          layout:
+            columnSize: 0.7966991680955566
+          children:
+            - component: Text
+              name: markdown1
+              layout:
+                columnSize: 1
+              props:
+                mode: text
+                value: Id d'un utilisateur
+                variant: h6
+            - component: Text
+              name: markdown7
+              layout:
+                columnSize: 1
+              props:
+                mode: text
+                value: Veuillez choisir votre nom d'utilisateur parmi la liste  --->
+                variant: subtitle2
+        - component: DataGrid
+          name: dataGrid
+          layout:
+            columnSize: 1.2033008319044436
+            height: 216
+          props:
+            rows:
+              $$jsExpression: donnerTousUtilisateurs.data
+            columns:
+              - field: id
+                type: number
+              - field: nom
+                type: string
+    - component: PageRow
+      name: pageRow3
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown2
+          props:
+            mode: text
+            value: Titre de la tâche
+            variant: h6
+        - component: TextField
+          name: textField1
+          props:
+            fullWidth: true
+            isRequired: true
+    - component: PageRow
+      name: pageRow2
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown3
+          props:
+            mode: text
+            value: Description
+            variant: h6
+        - component: TextField
+          name: textField2
+          props:
+            fullWidth: true
+            isRequired: true
+    - component: PageRow
+      name: pageRow1
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown4
+          props:
+            mode: text
+            value: Date de début
+            variant: h6
+        - component: DatePicker
+          name: datePicker
+          props:
+            fullWidth: true
+            isRequired: true
+            defaultValue:
+              $$jsExpression: '"10/04/2023"'
+    - component: PageRow
+      name: pageRow4
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown5
+          props:
+            mode: text
+            value: Date d'échéance
+            variant: h6
+        - component: DatePicker
+          name: datePicker1
+          props:
+            fullWidth: true
+            defaultValue:
+              $$jsExpression: '"10/04/2024"'
+            isRequired: true
+    - component: PageRow
+      name: pageRow5
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown6
+          props:
+            mode: text
+            value: Statut de la tâche
+            variant: h6
+        - component: Select
+          name: select1
+          props:
+            fullWidth: true
+            defaultValue:
+              $$jsExpression: '"false"'
+            isRequired: true
+            options:
+              - "true"
+              - "false"
+    - component: Button
+      name: button
+      props:
+        size: large
+        content: Enregistrer
+        onClick:
+          $$jsExpressionAction: ajouterTacheQuery.call()
+    - component: Button
+      name: button1
+      props:
+        content: Retour au menu principal
+        color: secondary
+        variant: text
+        onClick:
+          $$navigationAction:
+            page: projet_session
+            parameters: {}
+  display: shell
+  authorization:
+    allowAll: true
+  queries:
+    - name: donnerTousUtilisateurs
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/users/all`"
+        headers: []
+        method: GET
+        transformEnabled: true
+        transform: "return data.utilisateurs.map((utilisateurs) => {\r
+
+          \  return {\r
+
+          \    id: utilisateurs.id,\r
+
+          \    nom: utilisateurs.nom\r
+
+          \  }\r
+
+          });"
+        searchParams: []
+    - name: ajouterTacheQuery
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/tache`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \    \"utilisateur_id\":\"${parameters.utilisateur_id}\",\r
+
+              \    \"titre_tache\":\"${parameters.titre_tache}\",\r
+
+              \    \"description\":\"${parameters.description}\",\r
+
+              \    \"date_debut\":\"${parameters.date_debut}\",\r
+
+              \    \"date_echeance\":\"${parameters.date_echeance}\",\r
+
+              \    \"complete_tache\":${parameters.complete_tache}\r
+
+              }`"
+          contentType: text/plain
+        method: POST
+        searchParams: []
+      parameters:
+        - name: utilisateur_id
+          value:
+            $$jsExpression: dataGrid.selection.id
+        - name: titre_tache
+          value:
+            $$jsExpression: textField1.value
+        - name: description
+          value:
+            $$jsExpression: textField2.value
+        - name: date_debut
+          value:
+            $$jsExpression: datePicker.value
+        - name: date_echeance
+          value:
+            $$jsExpression: datePicker1.value
+        - name: complete_tache
+          value:
+            $$jsExpression: select1.value
+        - name: Authorization
+          value:
+            $$env: API_KEY

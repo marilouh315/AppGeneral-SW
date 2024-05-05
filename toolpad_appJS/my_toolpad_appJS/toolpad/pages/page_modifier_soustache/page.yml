@@ -1,0 +1,314 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: page
+  display: shell
+  authorization:
+    allowAll: true
+  content:
+    - component: Text
+      name: markdown
+      props:
+        mode: text
+        value: Modifier une sous-tâche
+        variant: h1
+      layout:
+        horizontalAlign: center
+        verticalAlign: center
+    - component: Text
+      name: markdown2
+      props:
+        mode: text
+        value: ID des tâches
+        variant: subtitle2
+    - component: DataGrid
+      name: dataGrid1
+      props:
+        rows:
+          $$jsExpression: donnerIDTaches.data
+        columns:
+          - field: id
+            type: number
+          - field: titre
+            type: string
+          - field: complete
+            type: boolean
+      layout:
+        height: 232
+    - component: PageRow
+      name: pageRow2
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown3
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+              props:
+                mode: text
+                value: AU COMPLET
+                variant: h3
+            - component: Text
+              name: markdown9
+              layout:
+                columnSize: 1
+              props:
+                mode: text
+                value:
+                  "Paramètres: id de la sous-tâche, id de la tâche, titre de la sous-tâche
+                  et le statut"
+                variant: h6
+            - component: PageRow
+              name: pageRow1
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown1
+                  props:
+                    mode: text
+                    variant: subtitle2
+                    value: ID de la sous-tâche
+                - component: TextField
+                  name: textField1
+            - component: PageRow
+              name: pageRow3
+              props:
+                justifyContent: start
+              children:
+                - component: PageColumn
+                  name: pageColumn3
+                  layout:
+                    columnSize: 0.9999247531043358
+                  children:
+                    - component: Text
+                      name: markdown5
+                      layout:
+                        columnSize: 1
+                      props:
+                        mode: text
+                        value: Titre de la sous-tâche
+                        variant: subtitle2
+                    - component: Text
+                      name: markdown6
+                      layout:
+                        columnSize: 1
+                      props:
+                        mode: text
+                        value: Statut
+                        variant: subtitle2
+                - component: PageColumn
+                  name: pageColumn2
+                  layout:
+                    columnSize: 1.0000752468956642
+                  children:
+                    - component: TextField
+                      name: textField
+                      layout:
+                        columnSize: 1
+                    - component: Select
+                      name: select
+                      layout:
+                        columnSize: 1
+                      props:
+                        fullWidth: true
+                        options:
+                          - "true"
+                          - "false"
+        - component: PageColumn
+          name: pageColumn1
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: markdown4
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+              props:
+                mode: text
+                value: "Le statut "
+                variant: h3
+            - component: Text
+              name: markdown8
+              layout:
+                columnSize: 1
+              props:
+                mode: text
+                value: "Paramètres: id de la sous-tâche et le statut"
+                variant: h6
+            - component: PageRow
+              name: pageRow4
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown10
+                  props:
+                    mode: text
+                    value: ID de la sous-tâche
+                    variant: subtitle2
+                - component: TextField
+                  name: textField2
+            - component: PageRow
+              name: pageRow5
+              props:
+                justifyContent: start
+              children:
+                - component: Text
+                  name: markdown7
+                  layout:
+                    columnSize: 0.9818043515527132
+                  props:
+                    mode: text
+                    value: Statut
+                    variant: subtitle2
+                - component: Select
+                  name: select1
+                  layout:
+                    columnSize: 1.0181956484472867
+                  props:
+                    fullWidth: true
+                    options:
+                      - "true"
+                      - "false"
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: Button
+          name: button
+          layout:
+            horizontalAlign: center
+          props:
+            color: secondary
+            content: Enregistrer les modifs
+            size: large
+            onClick:
+              $$jsExpressionAction: modifierSousTacheQuery.call()
+        - component: Button
+          name: button1
+          props:
+            content: Enregistrer les modifs
+            size: large
+            onClick:
+              $$jsExpressionAction: modifierStatutQuery.call()
+          layout:
+            horizontalAlign: center
+            verticalAlign: center
+    - component: Button
+      name: button2
+      layout:
+        horizontalAlign: start
+      props:
+        color: secondary
+        content: Retour au menu principal
+        size: small
+        variant: text
+        onClick:
+          $$navigationAction:
+            page: projet_session
+            parameters: {}
+  queries:
+    - name: donnerIDTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: return data.result;
+        transformEnabled: true
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: modifierStatutQuery
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://app-taches.onrender.com/api/liste_taches/sous_tache/u\
+            pdate_statut`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \    \"complete_sous_tache\": ${parameters.complete_sous_tache},\r
+
+              \    \"id_sous_tache\":${parameters.id_sous_tache}\r
+
+              }`"
+          contentType: text/plain
+        method: PUT
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+        - name: complete_sous_tache
+          value:
+            $$jsExpression: select1.value
+        - name: id_sous_tache
+          value:
+            $$jsExpression: textField2.value
+    - name: modifierSousTacheQuery
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/sous_tache/`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \    \"id_tache\":${parameters.id_tache},\r
+
+              \    \"titre_sous_tache\":\"${parameters.titre_sous_tache}\",\r
+
+              \    \"complete_sous_tache\":${parameters.complete_sous_tache},\r
+
+              \    \"id_sous_tache\":${parameters.id_sous_tache}\r
+
+              }`"
+          contentType: text/plain
+        method: PUT
+      parameters:
+        - name: Authorization
+          value:
+            $$env: API_KEY
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid1.selection.id
+        - name: titre_sous_tache
+          value:
+            $$jsExpression: textField.value
+        - name: complete_sous_tache
+          value:
+            $$jsExpression: select.value
+        - name: id_sous_tache
+          value:
+            $$jsExpression: textField1.value

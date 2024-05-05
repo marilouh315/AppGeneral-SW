@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: page
+  display: shell
+  authorization:
+    allowAll: true
+  content:
+    - component: Text
+      name: markdown
+      props:
+        mode: text
+        value: Supprimer une sous-tâche
+        variant: h1
+      layout:
+        horizontalAlign: center
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown1
+          props:
+            mode: text
+            value: ID de la sous-tâche
+            variant: subtitle2
+        - component: TextField
+          name: textField
+          props:
+            fullWidth: true
+            isRequired: true
+    - component: Button
+      name: button
+      props:
+        content: Supprimer
+        size: medium
+        onClick:
+          $$jsExpressionAction: supprimerSousTacheQuery.call()
+    - component: Button
+      name: button1
+      props:
+        variant: text
+        color: secondary
+        content: Retour au menu principal
+        onClick:
+          $$navigationAction:
+            page: projet_session
+            parameters: {}
+  queries:
+    - name: supprimerSousTacheQuery
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://app-taches.onrender.com/api/liste_taches/sous_tache/$\
+            {parameters.id_sous_tache}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+      parameters:
+        - name: id_sous_tache
+          value:
+            $$jsExpression: textField.value
+        - name: Authorization
+          value:
+            $$env: API_KEY

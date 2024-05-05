@@ -6,26 +6,30 @@
 
     <title>Création d'utilisateur</title>
     <link rel="stylesheet" type="text/css" href="../AppGeneral-SW/assets/css/style.css">
-    <script src="../AppGeneral-SW/assets/js/script.js"></script>
+    <script defer src="../AppGeneral-SW/assets/js/script.js"></script>
 </head>
 <body>
     <div class="main-conteneur">
         <fieldset>
             <legend>Création d'utilisateur</legend>
-            <form action="" method="POST">
+            <form action="" method="post" id="form">
                 <p>Remplissez les champs suivants pour vous créer un utilisateur. Il vous permettra d'utiliser l'API :)</p>
                 <label for="nom">Nom :</label><br>
                 <input type="text" id="nom" name="nom" required><br><br>
-        
+                <span class="message_erreur_nom hidden"></span>                       
+
                 <label for="courriel">Courriel :</label><br>
                 <input type="email" id="courriel" name="courriel" required><br><br>
+                <span class="message_erreur_courriel hidden"></span>                       
         
                 <label for="mot_de_passe">Mot de passe :</label><br>
                 <input type="password" id="mot_de_passe" name="mot_de_passe" required><br><br>
-        
-                <button type="submit" id="bouton_submit" onclick="">Enregistrer</button> 
+                <span class="message_erreur_mdp hidden"></span>                       
+
+                <button type="submit" id="bouton_submit">Enregistrer</button> 
 
             </form>
+            <span class="message_succes hidden"></span>
         </fieldset>
     </div>
     <div class="conteneur2">
@@ -35,10 +39,10 @@
                 <p>Tu as une mémoire à court terme, tu as perdu ta clé d'API? Génères-en une nouvelle!</p>
         
                 <label for="courriel">Courriel :</label><br>
-                <input type="email" id="courriel" name="courriel_cle" required><br><br>
+                <input type="email" id="courriel_cle" name="courriel_cle" required><br><br>
         
                 <label for="mot_de_passe">Mot de passe :</label><br>
-                <input type="password" id="mot_de_passe" name="mot_de_passe_cle" required><br><br>
+                <input type="password" id="mot_de_passe_cle" name="mot_de_passe_cle" required><br><br>
         
                 <button type="submit" id="bouton_submit_cle" onclick="">Générer!</button> 
 
