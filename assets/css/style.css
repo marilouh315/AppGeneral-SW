@@ -100,3 +100,12 @@ legend {
 }
 
 
+.message_succes_generer {
+    display: block;
+    color: white;
+    background-color: #28a745; /* Vert */
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #218838; /* Nuance de vert légèrement plus foncée */
+    margin-top: 10px; /* Espacement du haut */
+}
