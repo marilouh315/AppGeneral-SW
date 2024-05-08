@@ -17,12 +17,12 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "38f54641-a1dd-4b41-910d-bb540c927ad8"
+								"uuid": "23f543be-21d2-4d05-a92f-82100303e246"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"titre_tache\": \"test2\",\r\n  \"description\": \"test2\",\r\n  \"date_debut\": \"2023-03-04\",\r\n  \"date_echeance\": \"2024-02-02\",\r\n  \"complete_tache\": true\r\n}",
+							"raw": "{\r\n  \"titre_tache\": \"Acheter du lait\",\r\n  \"description\": \"test2\",\r\n  \"date_debut\": \"2023-03-04\",\r\n  \"date_echeance\": \"2024-02-02\",\r\n  \"complete_tache\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,12 +54,12 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "405e9720-f535-481d-9b72-7a518c79e1c1"
+								"uuid": "694c7fcc-58aa-4a62-b1f3-712be9b9bc84"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titre_tache\":\"TEst modif4\",\r\n    \"description\":\"test modif\",\r\n    \"date_debut\":\"2023-12-23\",\r\n    \"date_echeance\":\"2024-12-23\",\r\n    \"complete_tache\": true,\r\n    \"id_tache\":4\r\n}",
+							"raw": "{\r\n    \"titre_tache\":\"TEst modif4\",\r\n    \"description\":\"test modif\",\r\n    \"date_debut\":\"2023-12-23\",\r\n    \"date_echeance\":\"2024-12-23\",\r\n    \"complete_tache\": true,\r\n    \"id_tache\":3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,13 +91,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "75407791",
-								"uuid": "493495e1-672f-4f15-955e-9b8eb7ca32cc"
+								"value": "cle_api_test",
+								"uuid": "f262f239-d1dd-42d5-9b01-4b09362ec9e8"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"complete_tache\": false,\r\n    \"id_tache\":8\r\n}",
+							"raw": "{\r\n    \"complete_tache\": false,\r\n    \"id_tache\":3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,11 +130,11 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "10111b67-8964-469c-aef3-c5468d1b2574"
+								"uuid": "cf6794d3-5d25-406c-943b-78f2ae80b013"
 							}
 						],
 						"url": {
-							"raw": "https://app-taches.onrender.com/api/liste_taches/tache/7",
+							"raw": "https://app-taches.onrender.com/api/liste_taches/tache/2",
 							"protocol": "https",
 							"host": [
 								"app-taches",
@@ -145,7 +145,7 @@
 								"api",
 								"liste_taches",
 								"tache",
-								"7"
+								"2"
 							]
 						}
 					},
@@ -165,12 +165,12 @@
 							{
 								"key": "Authorization",
 								"value": "75407791",
-								"uuid": "9ac00c1a-8cc1-47d9-8ea7-d5695c58e16d"
+								"uuid": "b31e1aa8-daa7-4d8f-b6df-bc8c8114935e"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_tache\":7,\r\n    \"titre_sous_tache\":\"alo\",\r\n    \"complete_sous_tache\":true\r\n}",
+							"raw": "{\r\n    \"id_tache\":3,\r\n    \"titre_sous_tache\":\"alo\",\r\n    \"complete_sous_tache\":true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -203,12 +203,12 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "b40193d8-5e5a-4ab8-8822-ca9ee30807c5"
+								"uuid": "29755049-4c0e-404d-a9b0-0ffd69467cd8"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"complete_sous_tache\": false,\r\n    \"id_sous_tache\":3\r\n}",
+							"raw": "{\r\n    \"complete_sous_tache\": false,\r\n    \"id_sous_tache\":11\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,12 +241,12 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "e5051eae-945a-4991-a1dd-1ea5977b28ba"
+								"uuid": "e65c409a-622e-4094-ac9e-e9191d3cbc25"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_tache\":3,\r\n    \"titre_sous_tache\":\"testtttttttttt\",\r\n    \"complete_sous_tache\":true,\r\n    \"id_sous_tache\":3\r\n}",
+							"raw": "{\r\n    \"id_tache\":3,\r\n    \"titre_sous_tache\":\"testtttttttttt\",\r\n    \"complete_sous_tache\":true,\r\n    \"id_sous_tache\":11\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -279,11 +279,11 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "f616b0a7-ebd5-44bf-9079-eaca844bb801"
+								"uuid": "20396042-1eed-473d-abbc-ca2fd81a629c"
 							}
 						],
 						"url": {
-							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/4",
+							"raw": "https://app-taches.onrender.com/api/liste_taches/sous_tache/11",
 							"protocol": "https",
 							"host": [
 								"app-taches",
@@ -294,7 +294,7 @@
 								"api",
 								"liste_taches",
 								"sous_tache",
-								"4"
+								"11"
 							]
 						}
 					},
@@ -315,7 +315,7 @@
 								"key": "Authorization",
 								"value": "cle_api_test",
 								"type": "text",
-								"uuid": "ec74d884-dae9-4c23-ab4c-8262670ed624"
+								"uuid": "1a12fc91-99fb-434e-b26a-7f1444e514a2"
 							}
 						],
 						"url": {
@@ -343,7 +343,7 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "f3841180-05b3-45ad-9dbb-f700ec0a1b12"
+								"uuid": "4b7a13d5-1995-407e-abd9-434fc4c6a833"
 							}
 						],
 						"url": {
@@ -371,7 +371,7 @@
 							{
 								"key": "Authorization",
 								"value": "cle_api_test",
-								"uuid": "d8808b41-f8ce-4de0-bb0d-9bc0e25e1a41"
+								"uuid": "d2aeff12-7e84-47b4-809d-b7f257586945"
 							}
 						],
 						"url": {
@@ -436,7 +436,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"courriel_utilisateur\":\"gael@icloud.com\",\r\n    \"motDePasse_utilisateur\":\"gael\"\r\n}",
+							"raw": "{\r\n    \"courriel_utilisateur\":\"testtest@testtest.com\",\r\n    \"motDePasse_utilisateur\":\"test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -455,62 +455,6 @@
 								"api",
 								"users",
 								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Afficher données",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"courriel_utilisateur\":\"allo@allo.com\",\r\n    \"motDePasse_utilisateur\":\"allo\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://app-taches.onrender.com/api/users/",
-							"protocol": "https",
-							"host": [
-								"app-taches",
-								"onrender",
-								"com"
-							],
-							"path": [
-								"api",
-								"users",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Afficher tous les utilisateurs",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://app-taches.onrender.com/api/users/all",
-							"protocol": "https",
-							"host": [
-								"app-taches",
-								"onrender",
-								"com"
-							],
-							"path": [
-								"api",
-								"users",
-								"all"
 							]
 						}
 					},
