@@ -21,7 +21,7 @@ spec:
       name: markdown2
       props:
         mode: text
-        value: ID des tâches
+        value: 1)- Sélectionnez un ID de tâche
         variant: subtitle2
     - component: DataGrid
       name: dataGrid1
@@ -33,6 +33,30 @@ spec:
             type: number
           - field: titre
             type: string
+            width: 267
+          - field: complete
+            type: boolean
+      layout:
+        height: 232
+    - component: Text
+      name: markdown11
+      props:
+        mode: text
+        value:
+          $$jsExpression: "`2)- Choisissez un id de sous-tâche. Votre sélection:
+            ${dataGrid1.selection.id}`"
+        variant: subtitle2
+    - component: DataGrid
+      name: dataGrid2
+      props:
+        rows:
+          $$jsExpression: donnerSousTaches.data
+        columns:
+          - field: id
+            type: number
+          - field: titre
+            type: string
+            width: 267
           - field: complete
             type: boolean
       layout:
@@ -67,19 +91,6 @@ spec:
                   et le statut"
                 variant: h6
             - component: PageRow
-              name: pageRow1
-              props:
-                justifyContent: start
-              children:
-                - component: Text
-                  name: markdown1
-                  props:
-                    mode: text
-                    variant: subtitle2
-                    value: ID de la sous-tâche
-                - component: TextField
-                  name: textField1
-            - component: PageRow
               name: pageRow3
               props:
                 justifyContent: start
@@ -95,7 +106,7 @@ spec:
                         columnSize: 1
                       props:
                         mode: text
-                        value: Titre de la sous-tâche
+                        value: 3)- Entrez un titre pour la sous-tâche
                         variant: subtitle2
                     - component: Text
                       name: markdown6
@@ -103,7 +114,7 @@ spec:
                         columnSize: 1
                       props:
                         mode: text
-                        value: Statut
+                        value: 4)- Entrez son statut et cliquez sur 'Enregistrer'
                         variant: subtitle2
                 - component: PageColumn
                   name: pageColumn2
@@ -114,6 +125,9 @@ spec:
                       name: textField
                       layout:
                         columnSize: 1
+                      props:
+                        isRequired: true
+                        fullWidth: true
                     - component: Select
                       name: select
                       layout:
@@ -123,6 +137,7 @@ spec:
                         options:
                           - "true"
                           - "false"
+                        defaultValue: "false"
         - component: PageColumn
           name: pageColumn1
           layout:
@@ -146,19 +161,6 @@ spec:
                 value: "Paramètres: id de la sous-tâche et le statut"
                 variant: h6
             - component: PageRow
-              name: pageRow4
-              props:
-                justifyContent: start
-              children:
-                - component: Text
-                  name: markdown10
-                  props:
-                    mode: text
-                    value: ID de la sous-tâche
-                    variant: subtitle2
-                - component: TextField
-                  name: textField2
-            - component: PageRow
               name: pageRow5
               props:
                 justifyContent: start
@@ -166,45 +168,81 @@ spec:
                 - component: Text
                   name: markdown7
                   layout:
-                    columnSize: 0.9818043515527132
+                    columnSize: 0.9977511188508329
                   props:
                     mode: text
-                    value: Statut
+                    value: 3)- Entrez son statut et cliquez sur 'Enregistrer'
                     variant: subtitle2
                 - component: Select
                   name: select1
                   layout:
-                    columnSize: 1.0181956484472867
+                    columnSize: 1.0022488811491672
                   props:
                     fullWidth: true
                     options:
                       - "true"
                       - "false"
+                    defaultValue: "true"
     - component: PageRow
       name: pageRow
       props:
         justifyContent: start
       children:
-        - component: Button
-          name: button
+        - component: PageColumn
+          name: pageColumn4
           layout:
-            horizontalAlign: center
-          props:
-            color: secondary
-            content: Enregistrer les modifs
-            size: large
-            onClick:
-              $$jsExpressionAction: modifierSousTacheQuery.call()
-        - component: Button
-          name: button1
-          props:
-            content: Enregistrer les modifs
-            size: large
-            onClick:
-              $$jsExpressionAction: modifierStatutQuery.call()
+            columnSize: 1
+          children:
+            - component: PageRow
+              name: pageRow1
+              props:
+                justifyContent: start
+              children:
+                - component: Button
+                  name: button
+                  layout:
+                    columnSize: 1
+                    horizontalAlign: center
+                  props:
+                    color: secondary
+                    content: Enregistrer les modifs
+                    size: large
+                    onClick:
+                      $$jsExpressionAction: modifierSousTacheQuery.call()
+                - component: Text
+                  name: markdown1
+                  layout:
+                    columnSize: 1
+                  props:
+                    mode: text
+                    value:
+                      $$jsExpression: modifierSousTacheQuery.data.message
+                    variant: subtitle2
+        - component: PageColumn
+          name: pageColumn6
           layout:
-            horizontalAlign: center
-            verticalAlign: center
+            columnSize: 1
+          children:
+            - component: Button
+              name: button1
+              layout:
+                columnSize: 1
+                horizontalAlign: center
+                verticalAlign: center
+              props:
+                content: Enregistrer les modifs
+                size: large
+                onClick:
+                  $$jsExpressionAction: modifierStatutQuery.call()
+            - component: Text
+              name: markdown10
+              layout:
+                columnSize: 1
+              props:
+                mode: text
+                value:
+                  $$jsExpression: modifierStatutQuery.data.message
+                variant: subtitle2
     - component: Button
       name: button2
       layout:
@@ -232,6 +270,7 @@ spec:
         method: GET
         transform: return data.result;
         transformEnabled: true
+        searchParams: []
       parameters:
         - name: Authorization
           value:
@@ -258,8 +297,9 @@ spec:
               \    \"id_sous_tache\":${parameters.id_sous_tache}\r
 
               }`"
-          contentType: text/plain
+          contentType: application/json
         method: PUT
+        searchParams: []
       parameters:
         - name: Authorization
           value:
@@ -269,7 +309,7 @@ spec:
             $$jsExpression: select1.value
         - name: id_sous_tache
           value:
-            $$jsExpression: textField2.value
+            $$jsExpression: dataGrid2.selection.id_sous_tache
     - name: modifierSousTacheQuery
       mode: mutation
       query:
@@ -294,8 +334,9 @@ spec:
               \    \"id_sous_tache\":${parameters.id_sous_tache}\r
 
               }`"
-          contentType: text/plain
+          contentType: application/json
         method: PUT
+        searchParams: []
       parameters:
         - name: Authorization
           value:
@@ -311,4 +352,26 @@ spec:
             $$jsExpression: select.value
         - name: id_sous_tache
           value:
-            $$jsExpression: textField1.value
+            $$jsExpression: dataGrid2.selection.id_sous_tache
+    - name: donnerSousTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://app-taches.onrender.com/api/liste_taches/detail/${par\
+            ameters.id_tache}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: return data.result.taches[0].sous_taches;
+        transformEnabled: true
+      parameters:
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid1.selection.id
+        - name: Authorization
+          value:
+            $$env: API_KEY

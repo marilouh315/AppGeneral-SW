@@ -16,8 +16,28 @@ spec:
         variant: h1
       layout:
         horizontalAlign: center
+    - component: Text
+      name: markdown2
+      props:
+        mode: text
+        value: 1)- Sélectionnez un ID de tâche
+        variant: subtitle2
+    - component: DataGrid
+      name: dataGrid
+      layout:
+        height: 192.00001525878906
+      props:
+        rows:
+          $$jsExpression: donnerIDTaches.data
+        columns:
+          - field: id
+            type: number
+          - field: titre
+            type: string
+          - field: complete
+            type: boolean
     - component: PageRow
-      name: pageRow
+      name: pageRow1
       props:
         justifyContent: start
       children:
@@ -25,20 +45,45 @@ spec:
           name: markdown1
           props:
             mode: text
-            value: ID de la sous-tâche
+            value: 2)- Sélectionnez un ID de sous-tâche et cliquez sur 'Supprimer' ->
             variant: subtitle2
-        - component: TextField
-          name: textField
+        - component: Button
+          name: button
           props:
+            content: Supprimer
+            size: medium
+            onClick:
+              $$jsExpressionAction: supprimerSousTacheQuery.call()
             fullWidth: true
-            isRequired: true
-    - component: Button
-      name: button
+        - component: Button
+          name: button2
+          props:
+            content: Refresh
+            size: medium
+            onClick:
+              $$jsExpressionAction: donnerSousTaches.refetch()
+            fullWidth: true
+            color: secondary
+    - component: Text
+      name: markdown3
       props:
-        content: Supprimer
-        size: medium
-        onClick:
-          $$jsExpressionAction: supprimerSousTacheQuery.call()
+        mode: text
+        value:
+          $$jsExpression: supprimerSousTacheQuery.data
+      layout:
+        horizontalAlign: end
+    - component: DataGrid
+      name: dataGrid1
+      layout:
+        height: 232
+      props:
+        rows:
+          $$jsExpression: donnerSousTaches.data
+        columns:
+          - field: titre_sous_tache
+            type: string
+          - field: complete_sous_tache
+            type: boolean
     - component: Button
       name: button1
       props:
@@ -62,11 +107,53 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
-        method: GET
+        method: DELETE
+        searchParams: []
+        transform: return data.message;
+        transformEnabled: true
       parameters:
         - name: id_sous_tache
           value:
-            $$jsExpression: textField.value
+            $$jsExpression: dataGrid1.selection.id_sous_tache
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: donnerSousTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://app-taches.onrender.com/api/liste_taches/detail/${par\
+            ameters.id_tache}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: return data.result.taches[0].sous_taches;
+        transformEnabled: true
+      parameters:
+        - name: id_tache
+          value:
+            $$jsExpression: dataGrid.selection.id
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: donnerIDTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        transform: return data.result;
+        transformEnabled: true
+      parameters:
         - name: Authorization
           value:
             $$env: API_KEY

@@ -119,8 +119,8 @@ spec:
           props:
             mode: text
             value:
-              Sélectionnez une tâche à afficher avec les données plus haut et cliquez
-              sur le bouton pour afficher...
+              Sélectionnez une des tâches (toutes vos tâches) à afficher avec les
+              données plus haut et cliquez sur le bouton pour afficher...
             variant: subtitle2
         - component: Button
           name: button2
@@ -147,6 +147,7 @@ spec:
                 value:
                   $$jsExpression: "`Titre de la tâche :
                     ${afficherDetails.data.result.taches[0].tache_titre}`"
+                loading: false
             - component: Text
               name: markdown7
               props:
@@ -167,16 +168,22 @@ spec:
                   $$jsExpression: "`Description de la tâche :
                     ${afficherDetails.data.result.taches[0].description}`"
             - component: Text
-              name: markdown8
+              name: markdown15
               props:
                 mode: text
                 value:
                   $$jsExpression: "`Date d'échéance :
                     ${afficherDetails.data.result.taches[0].date_echeance}`"
+    - component: Text
+      name: markdown8
+      props:
+        mode: text
+        value:
+          $$jsExpression: "`Toutes les sous-tâches associées à la tâche
+            ${dataGrid1.selection.id}`"
+        variant: h6
     - component: DataGrid
       name: dataGrid2
-      layout:
-        height: 188
       props:
         rows:
           $$jsExpression: afficherDetails.data.result.taches[0].sous_taches
@@ -187,6 +194,8 @@ spec:
           - field: complete_sous_tache
             type: boolean
             width: 229
+      layout:
+        height: 188
     - component: PageRow
       name: pageRow5
       props:
@@ -354,7 +363,7 @@ spec:
       query:
         kind: rest
         url:
-          $$jsExpression: '"https://app-taches.onrender.com/api/liste_taches/all"'
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
         headers: [{ name: Authorization, value: { $$env: API_KEY } }]
         method: GET
         transform: return data.result;

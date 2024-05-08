@@ -54,6 +54,12 @@ spec:
             width: 393
           - field: complete
             type: boolean
+    - component: Text
+      name: markdown2
+      props:
+        mode: text
+        value:
+          $$jsExpression: supprimerTacheQuery.data.message
     - component: Button
       name: button1
       props:
@@ -83,7 +89,7 @@ spec:
           value:
             $$env: API_KEY
     - name: supprimerTacheQuery
-      mode: query
+      mode: mutation
       query:
         kind: rest
         url:

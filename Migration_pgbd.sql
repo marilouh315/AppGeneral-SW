@@ -47,3 +47,6 @@ INSERT INTO public.sous_tache (tache_id, titre, complete) VALUES
 select * from utilisateur;
 select * from public.taches t ;
 select * from public.sous_tache st ;
+
+
+

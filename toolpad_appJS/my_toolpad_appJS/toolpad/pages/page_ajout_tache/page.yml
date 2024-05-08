@@ -14,45 +14,6 @@ spec:
         value: Ajouter une tâche
         variant: h1
     - component: PageRow
-      name: pageRow
-      props:
-        justifyContent: start
-      children:
-        - component: PageColumn
-          name: pageColumn
-          layout:
-            columnSize: 0.7966991680955566
-          children:
-            - component: Text
-              name: markdown1
-              layout:
-                columnSize: 1
-              props:
-                mode: text
-                value: Id d'un utilisateur
-                variant: h6
-            - component: Text
-              name: markdown7
-              layout:
-                columnSize: 1
-              props:
-                mode: text
-                value: Veuillez choisir votre nom d'utilisateur parmi la liste  --->
-                variant: subtitle2
-        - component: DataGrid
-          name: dataGrid
-          layout:
-            columnSize: 1.2033008319044436
-            height: 216
-          props:
-            rows:
-              $$jsExpression: donnerTousUtilisateurs.data
-            columns:
-              - field: id
-                type: number
-              - field: nom
-                type: string
-    - component: PageRow
       name: pageRow3
       props:
         justifyContent: start
@@ -117,9 +78,9 @@ spec:
           name: datePicker1
           props:
             fullWidth: true
+            isRequired: true
             defaultValue:
               $$jsExpression: '"10/04/2024"'
-            isRequired: true
     - component: PageRow
       name: pageRow5
       props:
@@ -141,13 +102,66 @@ spec:
             options:
               - "true"
               - "false"
-    - component: Button
-      name: button
+    - component: PageRow
+      name: pageRow6
       props:
-        size: large
-        content: Enregistrer
-        onClick:
-          $$jsExpressionAction: ajouterTacheQuery.call()
+        justifyContent: start
+      children:
+        - component: Button
+          name: button
+          props:
+            size: large
+            content: Enregistrer
+            onClick:
+              $$jsExpressionAction: ajouterTacheQuery.call()
+        - component: Text
+          name: markdown7
+          props:
+            mode: text
+            value:
+              $$jsExpression: ajouterTacheQuery.data.message
+            variant: h5
+          layout:
+            horizontalAlign: end
+            verticalAlign: center
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: markdown1
+          props:
+            mode: text
+            value:
+              $$jsExpression: "`Tableau de tâches`"
+            variant: h6
+        - component: Button
+          name: button2
+          props:
+            size: small
+            content: Refresh
+            onClick:
+              $$jsExpressionAction: afficherToutesTaches.refetch()
+            color: secondary
+          layout:
+            verticalAlign: center
+            horizontalAlign: center
+    - component: DataGrid
+      name: dataGrid
+      props:
+        rows:
+          $$jsExpression: afficherToutesTaches.data
+        columns:
+          - field: id
+            type: number
+          - field: titre
+            type: string
+            width: 339
+          - field: complete
+            type: boolean
+      layout:
+        height: 220
     - component: Button
       name: button1
       props:
@@ -162,43 +176,19 @@ spec:
   authorization:
     allowAll: true
   queries:
-    - name: donnerTousUtilisateurs
-      mode: query
-      query:
-        kind: rest
-        url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/users/all`"
-        headers: []
-        method: GET
-        transformEnabled: true
-        transform: "return data.utilisateurs.map((utilisateurs) => {\r
-
-          \  return {\r
-
-          \    id: utilisateurs.id,\r
-
-          \    nom: utilisateurs.nom\r
-
-          \  }\r
-
-          });"
-        searchParams: []
     - name: ajouterTacheQuery
       mode: mutation
       query:
         kind: rest
         url:
           $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/tache`"
-        headers:
-          - name: Authorization
-            value:
-              $$env: API_KEY
+        headers: [{ name: Authorization, value: { $$env: API_KEY } }]
+        method: POST
+        searchParams: []
         body:
           kind: raw
           content:
             $$jsExpression: "`{\r
-
-              \    \"utilisateur_id\":\"${parameters.utilisateur_id}\",\r
 
               \    \"titre_tache\":\"${parameters.titre_tache}\",\r
 
@@ -211,13 +201,8 @@ spec:
               \    \"complete_tache\":${parameters.complete_tache}\r
 
               }`"
-          contentType: text/plain
-        method: POST
-        searchParams: []
+          contentType: application/json
       parameters:
-        - name: utilisateur_id
-          value:
-            $$jsExpression: dataGrid.selection.id
         - name: titre_tache
           value:
             $$jsExpression: textField1.value
@@ -233,6 +218,24 @@ spec:
         - name: complete_tache
           value:
             $$jsExpression: select1.value
+        - name: Authorization
+          value:
+            $$env: API_KEY
+    - name: afficherToutesTaches
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        searchParams: []
+        transform: return data.result;
+        transformEnabled: true
+      parameters:
         - name: Authorization
           value:
             $$env: API_KEY
