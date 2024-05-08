@@ -101,8 +101,8 @@ spec:
         kind: rest
         url:
           $$jsExpression:
-            "`https://app-taches.onrender.com/api/liste_taches/sous_tache/$\
-            {parameters.id_sous_tache}`"
+            "`${parameters.api_host}/api/liste_taches/sous_tache/${paramete\
+            rs.id_sous_tache}`"
         headers:
           - name: Authorization
             value:
@@ -118,14 +118,17 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: donnerSousTaches
       mode: query
       query:
         kind: rest
         url:
           $$jsExpression:
-            "`https://app-taches.onrender.com/api/liste_taches/detail/${par\
-            ameters.id_tache}`"
+            "`${parameters.api_host}/api/liste_taches/detail/${parameters.i\
+            d_tache}`"
         headers:
           - name: Authorization
             value:
@@ -133,6 +136,7 @@ spec:
         method: GET
         transform: return data.result.taches[0].sous_taches;
         transformEnabled: true
+        searchParams: []
       parameters:
         - name: id_tache
           value:
@@ -140,12 +144,15 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: donnerIDTaches
       mode: query
       query:
         kind: rest
         url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/all`"
         headers:
           - name: Authorization
             value:
@@ -153,7 +160,11 @@ spec:
         method: GET
         transform: return data.result;
         transformEnabled: true
+        searchParams: []
       parameters:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST

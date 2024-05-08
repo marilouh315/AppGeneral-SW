@@ -153,7 +153,7 @@ spec:
       query:
         kind: rest
         url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/all`"
         headers:
           - name: Authorization
             value:
@@ -166,12 +166,15 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: ajouterSousTacheQuery
       mode: mutation
       query:
         kind: rest
         url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/sous_tache`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/sous_tache`"
         headers:
           - name: Authorization
             value:
@@ -204,6 +207,9 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: donnerSousTaches
       mode: query
       query:
@@ -219,6 +225,7 @@ spec:
         method: GET
         transform: return data.result.taches[0].sous_taches;
         transformEnabled: true
+        searchParams: []
       parameters:
         - name: id_tache
           value:

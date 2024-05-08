@@ -181,7 +181,7 @@ spec:
       query:
         kind: rest
         url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/tache`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/tache`"
         headers: [{ name: Authorization, value: { $$env: API_KEY } }]
         method: POST
         searchParams: []
@@ -221,12 +221,15 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: afficherToutesTaches
       mode: query
       query:
         kind: rest
         url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/all`"
         headers:
           - name: Authorization
             value:
@@ -239,3 +242,6 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST

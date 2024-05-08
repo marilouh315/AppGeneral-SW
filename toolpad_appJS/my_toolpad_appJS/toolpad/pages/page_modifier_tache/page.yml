@@ -255,7 +255,7 @@ spec:
       query:
         kind: rest
         url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/all`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/all`"
         headers:
           - name: Authorization
             value:
@@ -278,12 +278,15 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: modifierTacheQuery
       mode: mutation
       query:
         kind: rest
         url:
-          $$jsExpression: "`https://app-taches.onrender.com/api/liste_taches/tache/`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/tache/`"
         headers: [{ name: Authorization, value: { $$env: API_KEY } }]
         method: PUT
         searchParams: []
@@ -328,14 +331,15 @@ spec:
         - name: id_tache
           value:
             $$jsExpression: dataGrid.selection.id
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: modifierStatutQuery
       mode: mutation
       query:
         kind: rest
         url:
-          $$jsExpression:
-            "`https://app-taches.onrender.com/api/liste_taches/tache/update\
-            _statut`"
+          $$jsExpression: "`${parameters.api_host}/api/liste_taches/tache/update_statut`"
         headers:
           - name: Authorization
             value:
@@ -363,14 +367,17 @@ spec:
         - name: id_tache
           value:
             $$jsExpression: dataGrid.selection.id
+        - name: api_host
+          value:
+            $$env: API_HOST
     - name: donnerTachesDetail
       mode: query
       query:
         kind: rest
         url:
           $$jsExpression:
-            "`https://app-taches.onrender.com/api/liste_taches/detail/${par\
-            ameters.id_tache}`"
+            "`${parameters.api_host}/api/liste_taches/detail/${parameters.i\
+            d_tache}`"
         headers:
           - name: Authorization
             value:
@@ -378,6 +385,7 @@ spec:
         method: GET
         transform: return data.result.taches;
         transformEnabled: true
+        searchParams: []
       parameters:
         - name: id_tache
           value:
@@ -385,3 +393,6 @@ spec:
         - name: Authorization
           value:
             $$env: API_KEY
+        - name: api_host
+          value:
+            $$env: API_HOST
